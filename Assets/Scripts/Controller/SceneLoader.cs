@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
@@ -31,7 +29,8 @@ public class SceneLoader : MonoBehaviour
         {
             modelInstances.fieldGenerator.GenerateBuilding(building.x, building.y, building.size);
         }
-        Debug.Log(savedGame.field[0, 0].color);
+        viewInstances.deleteWindow.SetActive(false);
+        viewInstances.buildWindow.SetActive(false);
     }
     public void SaveScene()
     {
