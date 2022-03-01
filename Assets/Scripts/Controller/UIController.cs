@@ -57,6 +57,7 @@ public class UIController : MonoBehaviour
         int x = int.Parse(viewInstances.xCoordinate.text);
         int y = int.Parse(viewInstances.yCoordinate.text);
         Debug.Log(viewInstances.cells[x, y].building);
+        viewInstances.buildings.Remove(viewInstances.cells[x, y].building);
         Destroy(viewInstances.cells[x, y].building);
         viewInstances.cells[x, y].isOccupied = false;
         viewInstances.deleteWindow.SetActive(false);

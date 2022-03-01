@@ -25,11 +25,11 @@ public class SceneLoader : MonoBehaviour
                 Destroy(viewInstances.cells[i, j].gameObject);
                 modelInstances.fieldGenerator.GenerateCell(i, j, savedGame.field[i, j].type,
                     savedGame.field[i, j].isBuildable, savedGame.field[i, j].isOccupied, modelInstances.gameController.GetColor(savedGame.field[i, j].color));
-                if (viewInstances.cells[i, j].isOccupied == true)
-                {
-                    modelInstances.fieldGenerator.GenerateBuilding(i, j, (int)viewInstances.cells[i, j].transform.localScale.x);
-                }
             }
+        }
+        foreach (Building building in savedGame.buildings)
+        {
+            modelInstances.fieldGenerator.GenerateBuilding(building.x, building.y, building.size);
         }
         Debug.Log(savedGame.field[0, 0].color);
     }
@@ -46,6 +46,10 @@ public class SceneLoader : MonoBehaviour
                 saveGame.field[i, j].isOccupied = viewInstances.cells[i, j].isOccupied;
                 saveGame.field[i, j].color = viewInstances.cells[i, j].color;
             }
+        }
+        foreach (GameObject building in viewInstances.buildings)
+        {
+            saveGame.buildings.Add(new Building((int)building.transform.position.x, (int)building.transform.position.z, (int)(building.transform.localScale.x + 0.2)));
         }
         using (FileStream file = File.Create(filepath))
         {

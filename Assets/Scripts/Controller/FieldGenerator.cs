@@ -48,6 +48,7 @@ public class FieldGenerator : MonoBehaviour
             building.transform.localScale = new Vector3(size - 0.2f, building.transform.localScale.y, size - 0.2f);
             building.GetComponent<BuildingController>().modelInstances = modelInstances;
             viewInstances.cells[x, y].building = building;
+            viewInstances.buildings.Add(building);
             for (int stepX = x - (size - 1); stepX <= x + (size - 1); stepX++)
             {
                 for (int stepY = y - (size - 1); stepY <= y + (size - 1); stepY++)
@@ -55,6 +56,7 @@ public class FieldGenerator : MonoBehaviour
                     viewInstances.cells[stepX, stepY].isOccupied = true;
                 }
             }
+
         }
     }
     public bool CanPlaceBuilding(int x, int y, int size)

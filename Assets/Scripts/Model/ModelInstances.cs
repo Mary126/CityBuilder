@@ -11,9 +11,24 @@ public class GameCell
     public string color;
 }
 [System.Serializable]
+public class Building
+{
+    public int size = 0;
+    public int x;
+    public int y;
+
+    public Building(int x, int y, int size)
+    {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+    }
+}
+[System.Serializable]
 public class GameField 
 { 
     public GameCell[,] field = new GameCell[100, 100];
+    public List<Building> buildings = new List<Building>();
     public GameField()
     {
         for (int i = 0; i < 100; i++)
