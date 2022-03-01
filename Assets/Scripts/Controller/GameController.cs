@@ -39,7 +39,8 @@ public class GameController : MonoBehaviour
         if (type == "water")
         {
             viewInstances.cells[x, y].type = "swamp";
-            viewInstances.cells[x, y].gameObject.GetComponent<Renderer>().material.color = Color.grey;
+            viewInstances.cells[x, y].gameObject.GetComponent<Renderer>().material.color = modelInstances.gameController.GetColor(" RGBA(0.140, 0.139, 0.038, 1.000)");
+            viewInstances.cells[x, y].color = " RGBA(0.140, 0.139, 0.038, 1.000)";
             modelInstances.isCooking = false;
             viewInstances.cookButton.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
         }
@@ -48,6 +49,7 @@ public class GameController : MonoBehaviour
             viewInstances.cells[x, y].type = "sand";
             viewInstances.cells[x, y].isBuildable = true;
             viewInstances.cells[x, y].gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+            viewInstances.cells[x, y].color = Color.yellow.ToString();
             modelInstances.isCooking = false;
             viewInstances.cookButton.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
         }

@@ -138,7 +138,7 @@ public class FieldGenerator : MonoBehaviour
     void GenerateField()
     {
         GenerateCells("water", false, false, Color.blue, modelInstances.waterCellCount);
-        GenerateCells("swamp", false, false, Color.grey, modelInstances.swampCellCount);
+        GenerateCells("swamp", false, false, modelInstances.gameController.GetColor(" RGBA(0.140, 0.139, 0.038, 1.000)"), modelInstances.swampCellCount);
         int grassCount = Random.Range(1000, 9000);
         int sandCount = 9000 - grassCount;
         GenerateCells("grass", true, false, Color.green, grassCount);
