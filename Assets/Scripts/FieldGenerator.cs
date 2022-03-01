@@ -40,19 +40,23 @@ public class FieldGenerator : MonoBehaviour
     }
     public void GenerateBuilding(int x, int y, int size)
     {
-        GameObject building = Instantiate(modelInstances.buildingPrefab);
-        building.transform.position = new Vector3(x, 0.5f, y);
-        building.transform.parent = viewInstances.field.transform;
-        building.transform.localScale = new Vector3(size - 0.2f, building.transform.localScale.y, size - 0.2f);
-        for (int stepX = x - (size - 1); stepX <= x + (size - 1); stepX++)
+        if (x - (size - 1) >= 0 && y - (size - 1) >= 0 && x + (size - 1) < 100 && y + (size - 1) < 100)
         {
-            for (int stepY = y - (size - 1); stepY <= y + (size - 1); stepY++)
+            GameObject building = Instantiate(modelInstances.buildingPrefab);
+            building.transform.position = new Vector3(x, 0.5f, y);
+            building.transform.parent = viewInstances.field.transform;
+            building.transform.localScale = new Vector3(size - 0.2f, building.transform.localScale.y, size - 0.2f);
+
+            for (int stepX = x - (size - 1); stepX <= x + (size - 1); stepX++)
             {
-                viewInstances.cells[stepX, stepY].isOccupied = true;
+                for (int stepY = y - (size - 1); stepY <= y + (size - 1); stepY++)
+                {
+                    viewInstances.cells[stepX, stepY].isOccupied = true;
+                }
             }
         }
     }
-    bool CanPlaceBuilding(int x, int y, int size)
+    public bool CanPlaceBuilding(int x, int y, int size)
     {
         int places = 0;
         int squareArea = -1;

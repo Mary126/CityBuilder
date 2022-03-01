@@ -9,9 +9,9 @@ public class CellController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (modelInstances.isPlacingBuilgigs == true)
+        if (modelInstances.isPlacingBuilding == true)
         {
-            modelInstances.gameController.BuildBuilding((int)transform.position.x, (int)transform.position.z, 1);
+            modelInstances.gameController.BuildBuilding((int)transform.position.x, (int)transform.position.z, modelInstances.placingBuildingSize);
         }
         if (modelInstances.isCooking == true)
         {

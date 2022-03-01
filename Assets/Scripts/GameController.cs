@@ -9,10 +9,6 @@ public class GameController : MonoBehaviour
     public ModelInstances modelInstances;
     public ViewInstances viewInstances;
 
-    public void MoveCamera()
-    {
-
-    }
     Color GetColor(string color)
     {
         int a = color.IndexOf('(') + 1;
@@ -74,9 +70,13 @@ public class GameController : MonoBehaviour
     }
     public void BuildBuilding(int x, int y, int size)
     {
-        if (viewInstances.cells[x, y].isBuildable == true && viewInstances.cells[x, y].isOccupied == false)
+        if (modelInstances.fieldGenerator.CanPlaceBuilding(x, y, size))
         {
             modelInstances.fieldGenerator.GenerateBuilding(x, y, size);
+            modelInstances.isPlacingBuilding = false;
+            modelInstances.placingBuildingSize = 0;
+            viewInstances.buildButton.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
+            HidePlacesForBuildings();
         }
     }
     public void ChangeCellType(string type, int x, int y)
@@ -85,34 +85,61 @@ public class GameController : MonoBehaviour
         {
             viewInstances.cells[x, y].type = "swamp";
             viewInstances.cells[x, y].gameObject.GetComponent<Renderer>().material.color = Color.grey;
+            modelInstances.isCooking = false;
+            viewInstances.cookButton.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
         }
         if (type == "swamp")
         {
             viewInstances.cells[x, y].type = "sand";
             viewInstances.cells[x, y].isBuildable = true;
             viewInstances.cells[x, y].gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+            modelInstances.isCooking = false;
+            viewInstances.cookButton.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
         }
     }
+    public void ShowPlacesForBuildings()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                if (viewInstances.cells[i, j].isOccupied == false && viewInstances.cells[i, j].isBuildable == true)
+                {
+                    viewInstances.cells[i, j].GetComponent<Renderer>().material.color = Color.magenta;
+                }
+            }
+        }
+    }
+    public void HidePlacesForBuildings()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                viewInstances.cells[i, j].GetComponent<Renderer>().material.color = GetColor(viewInstances.cells[i, j].color);
+            }
+        }
+    } 
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            viewInstances.cam.transform.Translate(Vector3.left * 5f * Time.deltaTime);
+            viewInstances.cameraBody.transform.Translate(Vector3.left * 5f * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            viewInstances.cam.transform.Translate(Vector3.right * 5f * Time.deltaTime);
+            viewInstances.cameraBody.transform.Translate(Vector3.right * 5f * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            viewInstances.cam.transform.Translate(Vector3.forward * 5f * Time.deltaTime);
+            viewInstances.cameraBody.transform.Translate(Vector3.forward * 5f * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            viewInstances.cam.transform.Translate(Vector3.back * 5f * Time.deltaTime);
+            viewInstances.cameraBody.transform.Translate(Vector3.back * 5f * Time.deltaTime);
         }
     }
 }

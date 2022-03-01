@@ -36,7 +36,9 @@ public class ModelInstances : MonoBehaviour
     public FieldGenerator fieldGenerator;
     public GameObject cellPrefab;
     public GameObject buildingPrefab;
-    public bool isPlacingBuilgigs = false;
+    public bool isPlacingBuilding = false;
+    public int placingBuildingSize = 0;
     public bool isCooking = false;
+    public bool isShowingBuildingWindow = false;
     public Vector3 camMoveDirection;
 }
