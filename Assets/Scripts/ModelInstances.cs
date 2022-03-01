@@ -13,12 +13,12 @@ public class GameCell
 [System.Serializable]
 public class GameField 
 { 
-    public GameCell[,] field = new GameCell[10, 10];
+    public GameCell[,] field = new GameCell[100, 100];
     public GameField()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 100; j++)
             {
                 field[i, j] = new GameCell();
             }
@@ -29,13 +29,14 @@ public class GameField
 
 public class ModelInstances : MonoBehaviour
 {
-    public int swampCellCount = 5;
-    public int waterCellCount = 5;
-    public int buildingCount = 10;
+    public int swampCellCount = 500;
+    public int waterCellCount = 500;
+    public int buildingsCellCount = 100;
     public GameController gameController;
     public FieldGenerator fieldGenerator;
     public GameObject cellPrefab;
     public GameObject buildingPrefab;
     public bool isPlacingBuilgigs = false;
     public bool isCooking = false;
+    public Vector3 camMoveDirection;
 }

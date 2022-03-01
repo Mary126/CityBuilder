@@ -152,13 +152,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03602379ebd895d4c965a9298fff1815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swampCellCount: 5
-  waterCellCount: 5
-  buildingCount: 10
+  swampCellCount: 500
+  waterCellCount: 500
+  buildingCount: 1000
   gameController: {fileID: 1063989328}
+  fieldGenerator: {fileID: 1063989330}
   cellPrefab: {fileID: 7127944364171542835, guid: 8ef653cd33e5c464385e33ca6e1c66ca, type: 3}
   buildingPrefab: {fileID: 4934643070695179559, guid: 90871ac1869007d4da02f220358c930f, type: 3}
-  field: {fileID: 118671880}
+  isPlacingBuilgigs: 0
+  isCooking: 0
+  camMoveDirection: {x: 0, y: 0, z: 0}
 --- !u!4 &73171243
 Transform:
   m_ObjectHideFlags: 0
@@ -353,11 +356,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d83483ff140efe45a47e10c40eb367a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
+  buildings: []
+  cam: {fileID: 963194229}
   saveButton: {fileID: 753330817}
   loadButton: {fileID: 1621368553}
   buildButton: {fileID: 267008883}
   cookButton: {fileID: 201421587}
+  field: {fileID: 118671880}
 --- !u!4 &211257095
 Transform:
   m_ObjectHideFlags: 0
@@ -470,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -981,6 +986,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1046,13 +1052,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.4848096, y: 0, z: 0, w: 0.8746197}
-  m_LocalPosition: {x: 5, y: 7.69, z: -1.24}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 73, y: 10, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 58, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &963194229
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1063989327
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ViewInstances : MonoBehaviour
 {
-    public CellInstances[,] cells = new CellInstances[10, 10];
-    public GameObject[,] buildings = new GameObject[10, 10];
+    public CellInstances[,] cells = new CellInstances[100, 100];
+    public List<GameObject> buildings = new List<GameObject>();
     public Camera cam;
     public Button saveButton;
     public Button loadButton;
