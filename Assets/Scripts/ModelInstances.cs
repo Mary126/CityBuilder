@@ -34,6 +34,8 @@ public class ModelInstances : MonoBehaviour
     public int buildingsCellCount = 100;
     public GameController gameController;
     public FieldGenerator fieldGenerator;
+    public SceneLoader sceneLoader;
+    public UIController uIController;
     public GameObject cellPrefab;
     public GameObject buildingPrefab;
     public bool isPlacingBuilding = false;

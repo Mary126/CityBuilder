@@ -17,5 +17,10 @@ public class ViewInstances : MonoBehaviour
     public Button button1x1;
     public Button button2x2;
     public Button button3x3;
+    public GameObject deleteWindow;
+    public Button delete;
+    public Text sizeInfo;
+    public Text xCoordinate;
+    public Text yCoordinate;
     public GameObject field;
 }

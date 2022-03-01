@@ -46,7 +46,8 @@ public class FieldGenerator : MonoBehaviour
             building.transform.position = new Vector3(x, 0.5f, y);
             building.transform.parent = viewInstances.field.transform;
             building.transform.localScale = new Vector3(size - 0.2f, building.transform.localScale.y, size - 0.2f);
-
+            building.GetComponent<BuildingController>().modelInstances = modelInstances;
+            viewInstances.cells[x, y].building = building;
             for (int stepX = x - (size - 1); stepX <= x + (size - 1); stepX++)
             {
                 for (int stepY = y - (size - 1); stepY <= y + (size - 1); stepY++)

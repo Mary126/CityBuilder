@@ -9,11 +9,11 @@ public class UIController : MonoBehaviour
 
     void SaveScene()
     {
-        modelInstances.gameController.SaveScene();
+        modelInstances.sceneLoader.SaveScene();
     }
     void LoadScene()
     {
-        modelInstances.gameController.LoadScene();
+        modelInstances.sceneLoader.LoadScene();
     }
     void ShowBuildingWindow()
     {
@@ -29,9 +29,10 @@ public class UIController : MonoBehaviour
             case "1x1": modelInstances.placingBuildingSize = 1; break;
             case "2x2": modelInstances.placingBuildingSize = 2; break;
             case "3x3": modelInstances.placingBuildingSize = 3; break;
-            default: modelInstances.placingBuildingSize = 0; break;
+            default: Debug.Log("Error wrong button"); break;
         }
         modelInstances.isPlacingBuilding = true;
+        modelInstances.isShowingBuildingWindow = false;
         modelInstances.gameController.ShowPlacesForBuildings();
         viewInstances.buildWindow.SetActive(false);
     }
@@ -43,6 +44,23 @@ public class UIController : MonoBehaviour
             viewInstances.cookButton.GetComponent<UnityEngine.UI.Image>().color = Color.red;
         }
     }
+    public void ShowBuildingInfoWindow(int size, int x, int y)
+    {
+        viewInstances.deleteWindow.SetActive(true);
+        viewInstances.sizeInfo.text = size + "x" + size;
+        Debug.Log(y);
+        viewInstances.xCoordinate.text = x.ToString();
+        viewInstances.yCoordinate.text = y.ToString();
+    }
+    void DeleteBuilding()
+    {
+        int x = int.Parse(viewInstances.xCoordinate.text);
+        int y = int.Parse(viewInstances.yCoordinate.text);
+        Debug.Log(viewInstances.cells[x, y].building);
+        Destroy(viewInstances.cells[x, y].building);
+        viewInstances.cells[x, y].isOccupied = false;
+        viewInstances.deleteWindow.SetActive(false);
+    }
     private void Start()
     {
         viewInstances.saveButton.onClick.AddListener(SaveScene);
@@ -52,6 +70,7 @@ public class UIController : MonoBehaviour
         viewInstances.button1x1.onClick.AddListener(delegate { PlaceBuildingButton(viewInstances.button1x1.tag); });
         viewInstances.button2x2.onClick.AddListener(delegate { PlaceBuildingButton(viewInstances.button2x2.tag); });
         viewInstances.button3x3.onClick.AddListener(delegate { PlaceBuildingButton(viewInstances.button3x3.tag); });
+        viewInstances.delete.onClick.AddListener(DeleteBuilding);
     }
     private void Update()
     {
@@ -62,6 +81,7 @@ public class UIController : MonoBehaviour
             if (!Physics.Raycast(ray, out hit, 10f))
             {
                 viewInstances.buildWindow.SetActive(false);
+                modelInstances.isShowingBuildingWindow = false;
                 viewInstances.buildButton.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
             }
         }
