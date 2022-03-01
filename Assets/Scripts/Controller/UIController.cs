@@ -56,7 +56,14 @@ public class UIController : MonoBehaviour
     {
         int x = int.Parse(viewInstances.xCoordinate.text);
         int y = int.Parse(viewInstances.yCoordinate.text);
-        Debug.Log(viewInstances.cells[x, y].building);
+        float size = viewInstances.cells[x, y].building.transform.localScale.x + 0.2f;
+        for (int stepX = x - (int)(size - 1); stepX <= x + (int)(size - 1); stepX++)
+        {
+            for (int stepY = y - (int)(size - 1); stepY <= y + (int)(size - 1); stepY++)
+            {
+                viewInstances.cells[stepX, stepY].isOccupied = false;
+            }
+        }
         viewInstances.buildings.Remove(viewInstances.cells[x, y].building);
         Destroy(viewInstances.cells[x, y].building);
         viewInstances.cells[x, y].isOccupied = false;
